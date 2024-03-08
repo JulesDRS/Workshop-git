@@ -22,14 +22,15 @@ parsed_infos_t *find_the_commands(char *filepath)
 
 int main(int ac, char **av)
 {
-    parsed_infos_t *infos = NULL;
+    parsed_infos_t *head = NULL;
 
     if (ac == 2 && (av[1][0] == '-' && av[1][1] == 'h' && av[1][2] == '\0')) {
         print_usage();
         return 0;
     }
-    infos = find_the_commands(av[1]);
-    if (entry_handler(ac, av) != 0 || !infos || file_spawner(av[1], infos->header) != 0)
+    head = find_the_commands(av[1]);
+    if (entry_handler(ac, av) != 0 || !head)
         return 84;
-    return 0;
+    // file_spawner(av[1], head->header);
+    return 0;
 }
